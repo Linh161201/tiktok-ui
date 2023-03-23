@@ -12,7 +12,7 @@ import Search from '~/pages/Search';
 const publicRoutes = [
     { path: '/', comments: Home },
     { path: '/following', comments: Following },
-    { path: '/profile', comments: Profile },
+    { path: '/:nickname', comments: Profile },
     { path: '/upload', comments: Upload, layout: HeaderOnly },
     { path: '/search', comments: Search, layout: null },
 ];
