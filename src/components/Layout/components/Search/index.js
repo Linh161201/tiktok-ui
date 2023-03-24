@@ -9,7 +9,6 @@ import { SearchIcon } from '~/components/Icons';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import styles from './Search.module.scss';
 import { useDebounce } from '~/hooks';
-import * as request from '~/utils/request';
 import * as searchServices from '~/apiServices/searchServices';
 
 const cx = classNames.bind(styles);
@@ -50,7 +49,23 @@ function Search() {
         setShowResult(false);
     };
 
+    const handleChange = (e) => {
+        const searchValue = e.target.value;
+        if (!searchValue.startsWith(' ')) {
+            setSearchValue(searchValue);
+        }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
+
+    const handleMouseDown = (e) => {
+        e.preventDefault();
+    };
+
     return (
+        //use div because warning tippy
         <div className={cx('wrapper')}>
             <HeadlessTippy
                 interactive
@@ -73,7 +88,7 @@ function Search() {
                         value={searchValue}
                         placeholder="Search accounts and videos"
                         spellCheck={false}
-                        onChange={(e) => setSearchValue(e.target.value)}
+                        onChange={handleChange}
                         onFocus={() => setShowResult(true)}
                     />
                     {!!searchValue && !loading && (
@@ -84,7 +99,7 @@ function Search() {
 
                     {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
-                    <button className={cx('search-btn')}>
+                    <button className={cx('search-btn')} onMouseDown={handleMouseDown} onClick={handleSubmit}>
                         <SearchIcon />
                     </button>
                 </div>
