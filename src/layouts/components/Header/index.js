@@ -20,7 +20,7 @@ import Image from '~/components/Image';
 import Menu from '~/components/Popper/Menu';
 import Search from '../Search';
 import styles from './Header.module.scss';
-import routesConfig from '~/config/routes';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
@@ -107,7 +107,7 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('content')}>
                 <div className={cx('logo')}>
-                    <Link className={cx('logo-link')} to={routesConfig.home}>
+                    <Link className={cx('logo-link')} to={config.routes.home}>
                         <img src={images.logo} alt="Tiktok" />
                     </Link>
                 </div>
@@ -118,9 +118,11 @@ function Header() {
                     {currentUser ? (
                         <>
                             <Tippy content="Upload video" placement="bottom">
-                                <button className={cx('action-btn')}>
-                                    <UploadIcon />
-                                </button>
+                                <Link className={cx('upload-link')} to={config.routes.upload}>
+                                    <button className={cx('action-btn')}>
+                                        <UploadIcon />
+                                    </button>
+                                </Link>
                             </Tippy>
                             <Tippy content="Message" placement="bottom">
                                 <button className={cx('action-btn')}>
